@@ -27,7 +27,7 @@
                     {% endif %}
                 </div>
                 <div class="col-md-8">
-                    <h1>👤 {{ pessoa.nome }} 🎭 TOOLTIPS ATIVOS</h1>
+                    <h1>👤 {{ pessoa.nome }}</h1>
                     {% if pessoa.nome_completo and pessoa.nome_completo != pessoa.nome %}
                         <h2 class="h4 text-muted mb-3">{{ pessoa.nome_completo }}</h2>
                     {% endif %}
@@ -73,6 +73,7 @@
                                                     data-bs-toggle="tooltip" 
                                                     data-bs-placement="top" 
                                                     data-cargo="{{ participacao.cargo }}"
+                                                    style="cursor: help; border-bottom: 1px dotted #74b9ff; color: #74b9ff;"
                                                     title="">{{ participacao.cargo }}</strong>
                                             {% if participacao.personagem %}
                                                 <br><small class="text-muted">como {{ participacao.personagem }}</small>
@@ -95,95 +96,81 @@
 
 {% endblock %}
 
-
+{% block scripts %}
 <script>
-// Solução definitiva para tooltips na filmografia
-window.addEventListener('load', function() {
-    // Aguardar carregamento completo
-    setTimeout(function() {
-        console.log('🎭 Inicializando tooltips para cargos...');
-        
-        // Descrições dos cargos
-        const cargos = {
-            'Diretor': 'Responsável pela visão criativa geral do filme, dirigindo atores e coordenando a equipe técnica.',
-            'Ator': 'Interpreta um personagem no filme, trazendo vida às palavras do roteiro através da performance.',
-            'Atriz': 'Interpreta um personagem no filme, trazendo vida às palavras do roteiro através da performance.',
-            'Produtor': 'Gerencia os aspectos financeiros e logísticos da produção, desde o desenvolvimento até a distribuição.',
-            'Roteirista': 'Escreve o roteiro do filme, criando diálogos, estrutura narrativa e desenvolvimento de personagens.',
-            'Editor': 'Monta o filme final, selecionando e organizando as cenas para criar o ritmo e fluxo narrativo.',
-            'Compositor': 'Cria a trilha sonora original do filme, compondo músicas que complementam a narrativa.',
-            'Produtor Executivo': 'Supervisiona múltiplos projetos e fornece financiamento ou recursos para a produção.'
-        };
+// Tooltips para cargos na filmografia da pessoa - VERSÃO DEBUG
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🎭 [DEBUG] Inicializando tooltips na página de pessoa...');
+    console.log('🎭 [DEBUG] Bootstrap disponível:', typeof window.bootstrap !== 'undefined');
+    console.log('🎭 [DEBUG] Bootstrap.Tooltip disponível:', window.bootstrap && typeof bootstrap.Tooltip !== 'undefined');
+    
+    // Descrições dos cargos
+    const cargos = {
+        'Diretor': 'Responsável pela visão criativa geral do filme, dirigindo atores e coordenando a equipe técnica.',
+        'Ator': 'Interpreta um personagem no filme, trazendo vida às palavras do roteiro através da performance.',
+        'Atriz': 'Interpreta um personagem no filme, trazendo vida às palavras do roteiro através da performance.',
+        'Produtor': 'Gerencia os aspectos financeiros e logísticos da produção, desde o desenvolvimento até a distribuição.',
+        'Roteirista': 'Escreve o roteiro do filme, criando diálogos, estrutura narrativa e desenvolvimento de personagens.',
+        'Editor': 'Monta o filme final, selecionando e organizando as cenas para criar o ritmo e fluxo narrativo.',
+        'Compositor': 'Cria a trilha sonora original do filme, compondo músicas que complementam a narrativa.',
+        'Produtor Executivo': 'Supervisiona múltiplos projetos e fornece financiamento ou recursos para a produção.'
+    };
 
-        // Buscar todos os elementos strong na filmografia
-        const filmografia = document.querySelector('h3:contains("Filmografia")');
-        if (filmografia) {
-            const container = filmografia.closest('.row');
-            const strongElements = container.querySelectorAll('strong');
-            
-            console.log('Encontrados', strongElements.length, 'elementos strong');
-            
-            strongElements.forEach(function(element) {
-                const texto = element.textContent.trim();
-                const descricao = cargos[texto];
-                
-                if (descricao) {
-                    console.log('✅ Configurando tooltip para:', texto);
-                    
-                    // Adicionar classes e atributos
-                    element.classList.add('job-role');
-                    element.setAttribute('title', descricao);
-                    element.setAttribute('data-bs-toggle', 'tooltip');
-                    element.setAttribute('data-bs-placement', 'top');
-                    
-                    // Estilo visual
-                    element.style.cursor = 'help';
-                    element.style.borderBottom = '1px dotted #74b9ff';
-                    element.style.color = '#74b9ff';
-                    
-                    // Tooltip Bootstrap
-                    if (window.bootstrap && bootstrap.Tooltip) {
-                        new bootstrap.Tooltip(element);
-                    }
-                    
-                    // Event listeners para debug
-                    element.addEventListener('mouseenter', function() {
-                        console.log('🖱️ Mouse sobre:', texto);
-                    });
-                }
-            });
-        }
-        
-        // Buscar também por classe job-role
+    // Aguardar um pouco para garantir que o DOM está pronto
+    setTimeout(function() {
+        console.log('🎭 [DEBUG] Procurando elementos .job-role...');
         const jobRoles = document.querySelectorAll('.job-role');
-        jobRoles.forEach(function(element) {
+        console.log('🎭 [DEBUG] Encontrados', jobRoles.length, 'elementos com classe job-role');
+        
+        // Debug: listar todos os elementos strong na página
+        const allStrongs = document.querySelectorAll('strong');
+        console.log('🎭 [DEBUG] Total de elementos strong na página:', allStrongs.length);
+        allStrongs.forEach((strong, i) => {
+            console.log(`🎭 [DEBUG] Strong ${i + 1}:`, strong.textContent.trim(), 'Classes:', strong.className);
+        });
+        
+        jobRoles.forEach(function(element, index) {
             const cargo = element.getAttribute('data-cargo') || element.textContent.trim();
-            if (cargos[cargo]) {
-                element.setAttribute('title', cargos[cargo]);
+            const descricao = cargos[cargo];
+            
+            console.log(`🎭 [DEBUG] Processando elemento ${index + 1}:`, cargo);
+            
+            if (descricao) {
+                console.log(`✅ [DEBUG] Configurando tooltip ${index + 1} para cargo:`, cargo);
+                
+                // Definir o título do tooltip
+                element.setAttribute('title', descricao);
+                
+                // Adicionar evento de hover manual para debug
+                element.addEventListener('mouseenter', function() {
+                    console.log('🖱️ [DEBUG] Mouse entrou em:', cargo);
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    console.log('🖱️ [DEBUG] Mouse saiu de:', cargo);
+                });
+                
+                // Inicializar tooltip Bootstrap
                 if (window.bootstrap && bootstrap.Tooltip) {
-                    new bootstrap.Tooltip(element);
+                    try {
+                        new bootstrap.Tooltip(element, {
+                            placement: 'top',
+                            trigger: 'hover focus'
+                        });
+                        console.log(`🎯 [DEBUG] Tooltip Bootstrap criado para:`, cargo);
+                    } catch (error) {
+                        console.error('❌ [DEBUG] Erro ao criar tooltip:', error);
+                    }
+                } else {
+                    console.log('❌ [DEBUG] Bootstrap.Tooltip não disponível');
                 }
+            } else {
+                console.log('❌ [DEBUG] Cargo não encontrado:', cargo);
             }
         });
         
-        console.log('🎉 Tooltips inicializados!');
-    }, 1000);
+        console.log('🎉 [DEBUG] Inicialização de tooltips concluída!');
+    }, 1000); // Aumentei o timeout para 1 segundo
 });
-
-// Função auxiliar para buscar texto
-HTMLElement.prototype.querySelector = function(selector) {
-    if (selector.includes(':contains(')) {
-        const text = selector.match(/:contains\("([^"]+)"\)/)[1];
-        const elements = this.querySelectorAll('*');
-        for (let el of elements) {
-            if (el.textContent.includes(text)) {
-                return el;
-            }
-        }
-        return null;
-    }
-    return Element.prototype.querySelector.call(this, selector);
-};
 </script>
-
 {% endblock %}
