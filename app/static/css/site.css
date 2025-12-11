@@ -1,0 +1,688 @@
+body {
+    padding-top: 100px; /* altura da navbar fixa aumentada */
+    padding-bottom: 80px; /* altura do rodapé fixo aumentada */
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0c0c0c 100%);
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+.navbar-brand small {
+    font-size: .8rem;
+    opacity: .8;
+}
+
+/* Navbar moderna e elegante */
+.navbar {
+    min-height: 80px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+    padding: 15px 0;
+}
+
+@media (min-width: 992px) {
+    .search-form {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.alert-half {
+    width: 50%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 9999;
+}
+
+/* Tema escuro personalizado */
+main {
+    background-color: #1a1a1a;
+}
+
+.container {
+    background-color: transparent;
+}
+
+/* Estilos para imagens de filmes e pessoas */
+.card-img-top {
+    transition: transform 0.3s ease;
+    border-radius: 8px 8px 0 0;
+}
+
+.card-img-top:hover {
+    transform: scale(1.02);
+}
+
+.poster-image {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.poster-image:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.person-photo {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Melhorar layout dos cards - Tema escuro */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #404040;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    border-color: #555;
+}
+
+.card-body {
+    background-color: transparent;
+    color: #f0f0f0;
+    padding: 20px;
+}
+
+.card-title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+}
+
+.card-subtitle {
+    color: #c0c0c0 !important;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.card-text {
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.card-text small {
+    color: #b0b0b0 !important;
+    font-weight: 500;
+}
+
+/* Botões com tema escuro */
+.btn-primary {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Placeholders para fotos melhorados */
+.bg-light {
+    background: linear-gradient(145deg, #3a3a3a 0%, #2f2f2f 100%) !important;
+    border: 2px solid rgba(116, 185, 255, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+}
+
+.bg-light .text-muted {
+    color: #c0c0c0 !important;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.bg-light svg {
+    color: #74b9ff;
+    filter: drop-shadow(0 0 5px rgba(116, 185, 255, 0.3));
+}
+
+/* Responsividade para imagens */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 250px !important;
+    }
+}
+
+/* Títulos e headers melhorados */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-shadow: 0 0 15px rgba(116, 185, 255, 0.4);
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #f8f9fa;
+}
+
+h3 {
+    font-size: 1.7rem;
+    color: #f8f9fa;
+    margin-bottom: 20px;
+}
+
+/* Badges com tema escuro */
+.badge {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%) !important;
+    color: #ecf0f1 !important;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.badge.bg-primary {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+}
+
+.badge.bg-secondary {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%) !important;
+}
+
+.badge.bg-info {
+    background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%) !important;
+}
+
+.badge.bg-warning {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important;
+}
+
+/* Footer moderno e elegante */
+footer {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%) !important;
+    color: #ffffff !important;
+    border-top: 2px solid rgba(52, 152, 219, 0.3);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+}
+
+footer a {
+    color: #74b9ff !important;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #0984e3 !important;
+    text-shadow: 0 0 8px rgba(116, 185, 255, 0.5);
+}
+
+footer .small {
+    color: #ddd !important;
+    line-height: 1.6;
+}
+
+footer img {
+    filter: brightness(1.2);
+}
+
+/* Dropdown menus melhorados */
+.dropdown-menu {
+    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%);
+    border: 2px solid rgba(116, 185, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    padding: 10px 0;
+}
+
+.dropdown-item {
+    color: #f0f0f0 !important;
+    font-weight: 500;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    color: #ffffff !important;
+    transform: translateX(5px);
+}
+
+.dropdown-divider {
+    border-color: rgba(116, 185, 255, 0.2);
+    margin: 8px 0;
+}
+
+/* Navbar brand melhorada */
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: 800;
+    font-size: 1.8rem;
+    text-shadow: 0 0 15px rgba(116, 185, 255, 0.6);
+    letter-spacing: 1px;
+}
+
+.navbar-brand:hover {
+    color: #74b9ff !important;
+    text-shadow: 0 0 20px rgba(116, 185, 255, 0.8);
+    transform: scale(1.05);
+}
+
+.navbar-brand small {
+    color: #74b9ff !important;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Nav links melhorados */
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.nav-link:hover {
+    color: #74b9ff !important;
+    text-shadow: 0 0 10px rgba(116, 185, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Search form melhorada */
+.search-form .form-control {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(116, 185, 255, 0.3);
+    color: #ffffff;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
+
+.search-form .form-control::placeholder {
+    color: rgba(255,255,255,0.8);
+    font-weight: 400;
+}
+
+.search-form .form-control:focus {
+    background: rgba(255,255,255,0.2);
+    border-color: #74b9ff;
+    box-shadow: 0 0 0 0.3rem rgba(116, 185, 255, 0.3);
+    color: #ffffff;
+}
+
+.search-form .btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 600;
+    border: none;
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+}
+
+/* Breadcrumb melhorado */
+.breadcrumb {
+    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%);
+    border: 2px solid rgba(116, 185, 255, 0.2);
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(5px);
+}
+
+.breadcrumb-item a {
+    color: #74b9ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #0984e3;
+    text-shadow: 0 0 8px rgba(116, 185, 255, 0.5);
+}
+
+.breadcrumb-item.active {
+    color: #f0f0f0;
+    font-weight: 600;
+}
+
+/* Links gerais */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* Animações suaves */
+* {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
+}
+
+/* Seleção de texto personalizada */
+::selection {
+    background: rgba(52, 152, 219, 0.3);
+    color: #ffffff;
+}
+
+/* Melhorias nos cards de filme */
+.card-img-top {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+.card:hover .card-img-top {
+    filter: brightness(1) contrast(1.2);
+}
+
+/* Efeito de brilho sutil nos títulos */
+h1 {
+    text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+/* Melhoria no footer */
+footer {
+    backdrop-filter: blur(10px);
+}
+
+/* Responsividade melhorada */
+@media (max-width: 768px) {
+    .navbar {
+        margin: 10px;
+        border-radius: 12px;
+    }
+    
+    .card {
+        margin-bottom: 20px;
+    }
+    
+    .search-form {
+        position: static !important;
+        transform: none !important;
+        margin: 10px 0;
+    }
+}
+/* Estilos para página de busca */
+.input-group .form-control {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(116, 185, 255, 0.3);
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.input-group .form-control:focus {
+    background: rgba(255,255,255,0.15);
+    border-color: #74b9ff;
+    box-shadow: 0 0 0 0.3rem rgba(116, 185, 255, 0.25);
+    color: #ffffff;
+}
+
+.input-group .form-control::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.input-group .btn {
+    border: 2px solid rgba(116, 185, 255, 0.3);
+    border-left: none;
+}
+
+/* Melhorias nos alertas - Texto bem visível */
+.alert {
+    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+    border: 2px solid rgba(116, 185, 255, 0.2) !important;
+    color: #ffffff !important;
+    border-radius: 12px;
+}
+
+.alert h4 {
+    color: #74b9ff !important;
+    margin-bottom: 15px;
+}
+
+.alert p, .alert li, .alert ul {
+    color: #f0f0f0 !important;
+}
+
+.alert-info {
+    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+    border-color: rgba(116, 185, 255, 0.3) !important;
+    color: #ffffff !important;
+}
+
+.alert-info h4 {
+    color: #74b9ff !important;
+}
+
+.alert-success {
+    background: linear-gradient(145deg, #27ae60 0%, #2ecc71 100%) !important;
+    border-color: rgba(46, 204, 113, 0.5) !important;
+    color: #ffffff !important;
+}
+
+.alert-success h4 {
+    color: #ffffff !important;
+}
+
+.alert-warning {
+    background: linear-gradient(145deg, #f39c12 0%, #e67e22 100%) !important;
+    border-color: rgba(243, 156, 18, 0.5) !important;
+    color: #ffffff !important;
+}
+
+.alert-warning h4 {
+    color: #ffffff !important;
+}
+
+.alert-danger {
+    background: linear-gradient(145deg, #e74c3c 0%, #c0392b 100%) !important;
+    border-color: rgba(231, 76, 60, 0.5) !important;
+    color: #ffffff !important;
+}
+
+.alert-danger h4 {
+    color: #ffffff !important;
+}
+/* Garantir visibilidade de todos os textos em alertas */
+.alert * {
+    color: inherit !important;
+}
+
+.alert strong {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+.alert .text-muted {
+    color: #d0d0d0 !important;
+}
+
+/* Flash messages do Flask */
+.alert.alert-success {
+    background: linear-gradient(145deg, #27ae60 0%, #2ecc71 100%) !important;
+    color: #ffffff !important;
+}
+
+.alert.alert-info {
+    background: linear-gradient(145deg, #3498db 0%, #2980b9 100%) !important;
+    color: #ffffff !important;
+}
+
+.alert.alert-warning {
+    background: linear-gradient(145deg, #f39c12 0%, #e67e22 100%) !important;
+    color: #ffffff !important;
+}
+
+.alert.alert-danger {
+    background: linear-gradient(145deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: #ffffff !important;
+}
+
+/* Mensagens de validação de formulários */
+.invalid-feedback {
+    color: #ff6b6b !important;
+    font-weight: 500;
+}
+
+.valid-feedback {
+    color: #51cf66 !important;
+    font-weight: 500;
+}
+
+/* Tooltips e popovers */
+.tooltip-inner {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+}
+
+.popover {
+    background-color: #2a2a2a !important;
+    border-color: #404040 !important;
+}
+
+.popover-body {
+    color: #f0f0f0 !important;
+}
+/* Toast messages com tema escuro */
+.toast {
+    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+    border: 2px solid rgba(116, 185, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+.toast-header {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+.toast-body {
+    color: #f0f0f0 !important;
+    background: transparent !important;
+}
+
+.toast .btn-close {
+    filter: invert(1);
+}
+
+/* Mensagens flash centralizadas */
+.alert-half {
+    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+    border: 2px solid rgba(116, 185, 255, 0.3) !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+}
+
+.alert-half .btn-close {
+    filter: invert(1);
+}
+
+/* Categorias específicas de mensagens */
+.alert-success.alert-half {
+    background: linear-gradient(145deg, #27ae60 0%, #2ecc71 100%) !important;
+    border-color: rgba(46, 204, 113, 0.5) !important;
+}
+
+.alert-warning.alert-half {
+    background: linear-gradient(145deg, #f39c12 0%, #e67e22 100%) !important;
+    border-color: rgba(243, 156, 18, 0.5) !important;
+}
+
+.alert-danger.alert-half {
+    background: linear-gradient(145deg, #e74c3c 0%, #c0392b 100%) !important;
+    border-color: rgba(231, 76, 60, 0.5) !important;
+}
+
+.alert-info.alert-half {
+    background: linear-gradient(145deg, #3498db 0%, #2980b9 100%) !important;
+    border-color: rgba(52, 152, 219, 0.5) !important;
+}
+
+/* Tooltips personalizados para tema escuro */
+.tooltip {
+    font-size: 0.9rem;
+}
+
+.tooltip .tooltip-inner {
+    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(116, 185, 255, 0.3);
+    border-radius: 8px;
+    padding: 10px 15px;
+    max-width: 300px;
+    text-align: left;
+    font-weight: 500;
+    line-height: 1.4;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: rgba(116, 185, 255, 0.3) !important;
+}
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: rgba(116, 185, 255, 0.3) !important;
+}
+
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+    border-left-color: rgba(116, 185, 255, 0.3) !important;
+}
+
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+    border-right-color: rgba(116, 185, 255, 0.3) !important;
+}
+
+/* Estilo para elementos com tooltip */
+.job-role {
+    cursor: help;
+    border-bottom: 1px dotted rgba(116, 185, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.job-role:hover {
+    color: #74b9ff !important;
+    border-bottom-color: #74b9ff;
+    text-shadow: 0 0 5px rgba(116, 185, 255, 0.3);
+}
+
+/* Melhorias nos cards de elenco */
+.card-body .job-role {
+    display: inline-block;
+    padding: 2px 0;
+}

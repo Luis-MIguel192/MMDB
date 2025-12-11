@@ -1,0 +1,77 @@
+{% extends "_layout.jinja2" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">👥 Pessoas COM TOOLTIPS ✅</h1>
+            
+            {% if pessoas %}
+                <div class="row">
+                    {% for pessoa in pessoas %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            {% if pessoa.foto_url %}
+                                <img src="{{ pessoa.foto_url }}" class="card-img-top" alt="Foto de {{ pessoa.nome }}" 
+                                     style="height: 300px; object-fit: cover;">
+                            {% else %}
+                                <div class="bg-light d-flex align-items-center justify-content-center flex-column" style="height: 300px;">
+                                    <svg class="bi mb-2" width="3em" height="3em" fill="currentColor">
+                                        <use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#person-circle"/>
+                                    </svg>
+                                    <span class="text-muted small">Sem foto disponível</span>
+                                </div>
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ pessoa.nome }}</h5>
+                                {% if pessoa.nome_completo and pessoa.nome_completo != pessoa.nome %}
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ pessoa.nome_completo }}</h6>
+                                {% endif %}
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {% if pessoa.nacionalidade %}{{ pessoa.nacionalidade }}{% endif %}
+                                        {% if pessoa.data_nascimento %}
+                                            {% if pessoa.nacionalidade %} • {% endif %}
+                                            {{ pessoa.data_nascimento.strftime('%d/%m/%Y') }}
+                                        {% endif %}
+                                    </small>
+                                </p>
+                                {% if pessoa.participacoes %}
+                                    <div class="mb-3">
+                                        <strong>Principais cargos:</strong><br>
+                                        {% set cargos_unicos = [] %}
+                                        {% for participacao in pessoa.participacoes %}
+                                            {% if participacao.cargo not in cargos_unicos %}
+                                                {% set _ = cargos_unicos.append(participacao.cargo) %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% for cargo in cargos_unicos[:3] %}
+                                            <span class="badge bg-secondary me-1 mb-1">
+                                                <span class="job-role" 
+                                                      data-bs-toggle="tooltip" 
+                                                      data-bs-placement="top" 
+                                                      data-cargo="{{ cargo }}"
+                                                      title="">{{ cargo }}</span>
+                                            </span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                {% if pessoa.biografia %}
+                                    <p class="card-text">{{ pessoa.biografia[:100] }}{% if pessoa.biografia|length > 100 %}...{% endif %}</p>
+                                {% endif %}
+                                <a href="{{ url_for('filmes.detalhes_pessoa', pessoa_id=pessoa.id) }}" class="btn btn-primary">Ver Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <h4>Nenhuma pessoa encontrada</h4>
+                    <p>Ainda não há pessoas cadastradas no sistema.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

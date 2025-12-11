@@ -1,0 +1,48 @@
+{% extends "_layout.jinja2" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">🎬 Filmes</h1>
+            
+            {% if filmes %}
+                <div class="row">
+                    {% for filme in filmes %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            {% if filme.poster_url %}
+                                <img src="{{ filme.poster_url }}" class="card-img-top" alt="Poster de {{ filme.titulo }}" 
+                                     style="height: 400px; object-fit: cover;">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ filme.titulo }}</h5>
+                                {% if filme.titulo_original and filme.titulo_original != filme.titulo %}
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ filme.titulo_original }}</h6>
+                                {% endif %}
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {% if filme.ano_lancamento %}{{ filme.ano_lancamento }}{% endif %}
+                                        {% if filme.genero %} • {{ filme.genero }}{% endif %}
+                                        {% if filme.duracao_minutos %} • {{ filme.duracao_minutos }} min{% endif %}
+                                    </small>
+                                </p>
+                                {% if filme.sinopse %}
+                                    <p class="card-text">{{ filme.sinopse[:150] }}{% if filme.sinopse|length > 150 %}...{% endif %}</p>
+                                {% endif %}
+                                <a href="{{ url_for('filmes.detalhes_filme', filme_id=filme.id) }}" class="btn btn-primary">Ver Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <h4>Nenhum filme encontrado</h4>
+                    <p>Ainda não há filmes cadastrados no sistema.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

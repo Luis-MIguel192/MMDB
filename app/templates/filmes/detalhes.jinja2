@@ -1,0 +1,108 @@
+{% extends "_layout.jinja2" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('root.index') }}">Início</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('filmes.listar_filmes') }}">Filmes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ filme.titulo }}</li>
+                </ol>
+            </nav>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    {% if filme.poster_url %}
+                        <img src="{{ filme.poster_url }}" class="img-fluid rounded shadow" alt="Poster de {{ filme.titulo }}" 
+                             style="max-height: 600px; width: 100%; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 400px;">
+                            <span class="text-muted">Sem poster disponível</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <h1>🎬 {{ filme.titulo }}</h1>
+                    {% if filme.titulo_original and filme.titulo_original != filme.titulo %}
+                        <h2 class="h4 text-muted mb-3">{{ filme.titulo_original }}</h2>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        {% if filme.ano_lancamento %}
+                            <span class="badge bg-primary me-2">{{ filme.ano_lancamento }}</span>
+                        {% endif %}
+                        {% if filme.genero %}
+                            <span class="badge bg-secondary me-2">{{ filme.genero }}</span>
+                        {% endif %}
+                        {% if filme.duracao_minutos %}
+                            <span class="badge bg-info me-2">{{ filme.duracao_minutos }} min</span>
+                        {% endif %}
+                        {% if filme.classificacao %}
+                            <span class="badge bg-warning">{{ filme.classificacao }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    {% if filme.sinopse %}
+                        <div class="mb-4">
+                            <h3>Sinopse</h3>
+                            <p class="lead">{{ filme.sinopse }}</p>
+                        </div>
+                    {% endif %}
+                    
+                    {% if filme.data_lancamento %}
+                        <p><strong>Data de Lançamento:</strong> {{ filme.data_lancamento.strftime('%d/%m/%Y') }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% if elenco %}
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3>🎭 Elenco e Equipe</h3>
+                        <div class="row">
+                            {% for participacao in elenco %}
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <div class="card h-100">
+                                    {% if participacao.pessoa.foto_url %}
+                                        <img src="{{ participacao.pessoa.foto_url }}" class="card-img-top" alt="Foto de {{ participacao.pessoa.nome }}" 
+                                             style="height: 200px; object-fit: cover;">
+                                    {% else %}
+                                        <div class="bg-light d-flex align-items-center justify-content-center flex-column" style="height: 200px;">
+                                            <svg class="bi mb-2" width="2em" height="2em" fill="currentColor">
+                                                <use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#person-circle"/>
+                                            </svg>
+                                            <span class="text-muted small">Sem foto disponível</span>
+                                        </div>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="{{ url_for('filmes.detalhes_pessoa', pessoa_id=participacao.pessoa.id) }}" class="text-decoration-none">
+                                                {{ participacao.pessoa.nome }}
+                                            </a>
+                                        </h5>
+                                        <p class="card-text">
+                                            <strong class="job-role" 
+                                                    data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" 
+                                                    data-cargo="{{ participacao.cargo }}"
+                                                    title="">{{ participacao.cargo }}</strong>
+                                            {% if participacao.personagem %}
+                                                <br><small class="text-muted">como {{ participacao.personagem }}</small>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

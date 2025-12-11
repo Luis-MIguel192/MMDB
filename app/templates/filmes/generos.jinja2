@@ -1,0 +1,42 @@
+{% extends "_layout.jinja2" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('root.index') }}">Início</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('filmes.listar_filmes') }}">Filmes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Gêneros</li>
+                </ol>
+            </nav>
+            
+            <h1 class="mb-4">🎭 Gêneros de Filmes</h1>
+            
+            {% if generos %}
+                <div class="row">
+                    {% for genero in generos %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ genero }}</h5>
+                                <a href="{{ url_for('filmes.filmes_por_genero', genero=genero.lower().replace(' ', '-')) }}" 
+                                   class="btn btn-primary">
+                                    Ver Filmes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <h4>Nenhum gênero encontrado</h4>
+                    <p>Ainda não há gêneros cadastrados no sistema.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

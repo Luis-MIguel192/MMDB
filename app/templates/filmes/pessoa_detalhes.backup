@@ -1,0 +1,138 @@
+{% extends "_layout.jinja2" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('root.index') }}">Início</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('filmes.listar_pessoas') }}">Pessoas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ pessoa.nome }}</li>
+                </ol>
+            </nav>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    {% if pessoa.foto_url %}
+                        <img src="{{ pessoa.foto_url }}" class="img-fluid rounded shadow" alt="Foto de {{ pessoa.nome }}" 
+                             style="max-height: 500px; width: 100%; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center flex-column" style="height: 300px;">
+                            <svg class="bi mb-3" width="4em" height="4em" fill="currentColor">
+                                <use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#person-circle"/>
+                            </svg>
+                            <span class="text-muted">Sem foto disponível</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <h1>👤 {{ pessoa.nome }}</h1>
+                    {% if pessoa.nome_completo and pessoa.nome_completo != pessoa.nome %}
+                        <h2 class="h4 text-muted mb-3">{{ pessoa.nome_completo }}</h2>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        {% if pessoa.nacionalidade %}
+                            <span class="badge bg-primary me-2">{{ pessoa.nacionalidade }}</span>
+                        {% endif %}
+                        {% if pessoa.data_nascimento %}
+                            <span class="badge bg-secondary">{{ pessoa.data_nascimento.strftime('%d/%m/%Y') }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    {% if pessoa.biografia %}
+                        <div class="mb-4">
+                            <h3>Biografia</h3>
+                            <p class="lead">{{ pessoa.biografia }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% if participacoes %}
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3>🎬 Filmografia</h3>
+                        <div class="row">
+                            {% for participacao in participacoes %}
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <div class="card h-100">
+                                    {% if participacao.filme.poster_url %}
+                                        <img src="{{ participacao.filme.poster_url }}" class="card-img-top" alt="Poster de {{ participacao.filme.titulo }}" 
+                                             style="height: 250px; object-fit: cover;">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="{{ url_for('filmes.detalhes_filme', filme_id=participacao.filme.id) }}" class="text-decoration-none">
+                                                {{ participacao.filme.titulo }}
+                                            </a>
+                                        </h5>
+                                        <p class="card-text">
+                                            <!-- TOOLTIP TEST -->
+                                            <strong class="job-role" 
+                                                    data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" 
+                                                    data-cargo="{{ participacao.cargo }}"
+                                                    title="">{{ participacao.cargo }}</strong>
+                                            {% if participacao.personagem %}
+                                                <br><small class="text-muted">como {{ participacao.personagem }}</small>
+                                            {% endif %}
+                                            {% if participacao.filme.ano_lancamento %}
+                                                <br><small class="text-muted">{{ participacao.filme.ano_lancamento }}</small>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Descrições dos cargos no cinema
+    const jobDescriptions = {
+        'Diretor': 'Responsável pela visão criativa geral do filme, dirigindo atores e coordenando a equipe técnica.',
+        'Diretor de Fotografia': 'Responsável pela captura visual do filme, incluindo iluminação, enquadramento e movimento de câmera.',
+        'Produtor': 'Gerencia os aspectos financeiros e logísticos da produção, desde o desenvolvimento até a distribuição.',
+        'Produtor Executivo': 'Supervisiona múltiplos projetos e fornece financiamento ou recursos para a produção.',
+        'Roteirista': 'Escreve o roteiro do filme, criando diálogos, estrutura narrativa e desenvolvimento de personagens.',
+        'Editor': 'Monta o filme final, selecionando e organizando as cenas para criar o ritmo e fluxo narrativo.',
+        'Compositor': 'Cria a trilha sonora original do filme, compondo músicas que complementam a narrativa.',
+        'Designer de Produção': 'Responsável pelo visual geral do filme, incluindo cenários, figurinos e paleta de cores.',
+        'Diretor de Arte': 'Supervisiona a criação dos elementos visuais, trabalhando com cenógrafos e decoradores.',
+        'Figurinista': 'Desenha e coordena os figurinos dos personagens, contribuindo para a caracterização.',
+        'Maquiador': 'Responsável pela maquiagem dos atores, incluindo efeitos especiais e caracterização.',
+        'Supervisor de Efeitos Visuais': 'Coordena a criação de efeitos digitais e visuais especiais do filme.',
+        'Mixador de Som': 'Responsável pela mixagem final do áudio, balanceando diálogos, música e efeitos sonoros.',
+        'Ator': 'Interpreta um personagem no filme, trazendo vida às palavras do roteiro através da performance.',
+        'Atriz': 'Interpreta um personagem no filme, trazendo vida às palavras do roteiro através da performance.',
+        'Diretor Assistente': 'Auxilia o diretor na coordenação do set e no cumprimento do cronograma de filmagem.',
+        'Operador de Câmera': 'Opera as câmeras durante as filmagens, seguindo as direções do diretor de fotografia.',
+        'Gaffer': 'Chefe da equipe de iluminação, responsável por implementar o plano de iluminação do filme.',
+        'Continuísta': 'Garante a continuidade visual entre as cenas, anotando detalhes de figurino, maquiagem e cenário.',
+        'Casting Director': 'Responsável pela seleção e contratação dos atores para os diversos papéis do filme.'
+    };
+
+    // Inicializar tooltips para cargos
+    const jobRoles = document.querySelectorAll('.job-role');
+    jobRoles.forEach(function(element) {
+        const cargo = element.getAttribute('data-cargo');
+        const description = jobDescriptions[cargo] || 'Profissional que contribui para a realização do filme.';
+        element.setAttribute('title', description);
+        
+        // Inicializar tooltip do Bootstrap
+        new bootstrap.Tooltip(element, {
+            placement: 'top',
+            trigger: 'hover focus'
+        });
+    });
+});
+</script>
+{% endblock %}

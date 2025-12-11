@@ -1,0 +1,18 @@
+{
+  "apiName": "kiro-test",
+  "workspaceId": "5e19fa2a-aac1-43c7-860f-6effdbb3781a",
+  "collectionId": "2a864001-11b2-470a-8324-b5ae5fe480aa",
+  "collectionUid": "50727324-2a864001-11b2-470a-8324-b5ae5fe480aa",
+  "environmentIds": {
+    "local": "dc59c755-28e1-431d-948b-c78d2c445df0",
+    "production": ""
+  },
+  "environmentUids": {
+    "local": "50727324-dc59c755-28e1-431d-948b-c78d2c445df0",
+    "production": ""
+  },
+  "baseUrls": {
+    "local": "http://localhost:5000",
+    "production": "https://your-production-url.com"
+  }
+}

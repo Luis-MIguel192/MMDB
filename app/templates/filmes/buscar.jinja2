@@ -1,0 +1,135 @@
+{% extends "_layout.jinja2" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">🔍 Buscar</h1>
+            
+            <!-- Formulário de busca -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form method="get" action="{{ url_for('filmes.buscar') }}">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" name="q" 
+                                   value="{{ query }}" placeholder="Buscar filmes ou pessoas..." 
+                                   aria-label="Buscar">
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                <svg class="bi" width="1em" height="1em" fill="currentColor">
+                                    <use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#search"/>
+                                </svg>
+                                Buscar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            {% if query %}
+                <p class="text-muted mb-4">Resultados para: <strong>"{{ query }}"</strong></p>
+                
+                <!-- Resultados de Filmes -->
+                {% if filmes %}
+                    <h3 class="mb-3">🎬 Filmes ({{ filmes|length }})</h3>
+                    <div class="row mb-5">
+                        {% for filme in filmes %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                {% if filme.poster_url %}
+                                    <img src="{{ filme.poster_url }}" class="card-img-top" alt="Poster de {{ filme.titulo }}" 
+                                         style="height: 300px; object-fit: cover;">
+                                {% else %}
+                                    <div class="bg-light d-flex align-items-center justify-content-center flex-column" style="height: 300px;">
+                                        <svg class="bi mb-2" width="3em" height="3em" fill="currentColor">
+                                            <use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#film"/>
+                                        </svg>
+                                        <span class="text-muted small">Sem poster disponível</span>
+                                    </div>
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ filme.titulo }}</h5>
+                                    {% if filme.titulo_original and filme.titulo_original != filme.titulo %}
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ filme.titulo_original }}</h6>
+                                    {% endif %}
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            {% if filme.ano_lancamento %}{{ filme.ano_lancamento }}{% endif %}
+                                            {% if filme.genero %} • {{ filme.genero }}{% endif %}
+                                            {% if filme.duracao_minutos %} • {{ filme.duracao_minutos }} min{% endif %}
+                                        </small>
+                                    </p>
+                                    {% if filme.sinopse %}
+                                        <p class="card-text">{{ filme.sinopse[:100] }}{% if filme.sinopse|length > 100 %}...{% endif %}</p>
+                                    {% endif %}
+                                    <a href="{{ url_for('filmes.detalhes_filme', filme_id=filme.id) }}" class="btn btn-primary">Ver Detalhes</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <!-- Resultados de Pessoas -->
+                {% if pessoas %}
+                    <h3 class="mb-3">👥 Pessoas ({{ pessoas|length }})</h3>
+                    <div class="row">
+                        {% for pessoa in pessoas %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                {% if pessoa.foto_url %}
+                                    <img src="{{ pessoa.foto_url }}" class="card-img-top" alt="Foto de {{ pessoa.nome }}" 
+                                         style="height: 250px; object-fit: cover;">
+                                {% else %}
+                                    <div class="bg-light d-flex align-items-center justify-content-center flex-column" style="height: 250px;">
+                                        <svg class="bi mb-2" width="2em" height="2em" fill="currentColor">
+                                            <use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#person-circle"/>
+                                        </svg>
+                                        <span class="text-muted small">Sem foto disponível</span>
+                                    </div>
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ pessoa.nome }}</h5>
+                                    {% if pessoa.nome_completo and pessoa.nome_completo != pessoa.nome %}
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ pessoa.nome_completo }}</h6>
+                                    {% endif %}
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            {% if pessoa.nacionalidade %}{{ pessoa.nacionalidade }}{% endif %}
+                                            {% if pessoa.data_nascimento %}
+                                                {% if pessoa.nacionalidade %} • {% endif %}
+                                                {{ pessoa.data_nascimento.strftime('%d/%m/%Y') }}
+                                            {% endif %}
+                                        </small>
+                                    </p>
+                                    {% if pessoa.biografia %}
+                                        <p class="card-text">{{ pessoa.biografia[:80] }}{% if pessoa.biografia|length > 80 %}...{% endif %}</p>
+                                    {% endif %}
+                                    <a href="{{ url_for('filmes.detalhes_pessoa', pessoa_id=pessoa.id) }}" class="btn btn-primary">Ver Detalhes</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                {% if not filmes and not pessoas %}
+                    <div class="alert alert-info">
+                        <h4>Nenhum resultado encontrado</h4>
+                        <p>Não foram encontrados filmes ou pessoas com o termo "{{ query }}".</p>
+                        <p>Tente usar termos diferentes ou verifique a ortografia.</p>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="alert alert-info">
+                    <h4>Como buscar</h4>
+                    <p>Use o campo acima para buscar por:</p>
+                    <ul>
+                        <li><strong>Filmes:</strong> título, título original ou sinopse</li>
+                        <li><strong>Pessoas:</strong> nome, nome completo ou biografia</li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

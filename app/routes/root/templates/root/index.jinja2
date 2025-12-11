@@ -1,0 +1,39 @@
+{% extends "_layout.jinja2" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
+                <h1 class="display-4">🎬 Bem-vindo ao MyMovieDB!</h1>
+                <p class="lead">Descubra filmes incríveis, explore elencos e mergulhe no mundo do cinema.</p>
+                <hr class="my-4">
+                <p>Explore nossa coleção de filmes e descubra informações sobre seus atores e diretores favoritos.</p>
+                <a class="btn btn-light btn-lg" href="{{ url_for('filmes.listar_filmes') }}" role="button">Ver Filmes</a>
+                <a class="btn btn-outline-light btn-lg ms-2" href="{{ url_for('filmes.listar_pessoas') }}" role="button">Ver Pessoas</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">🎭 Filmes</h5>
+                    <p class="card-text">Explore nossa coleção de filmes clássicos e modernos.</p>
+                    <a href="{{ url_for('filmes.listar_filmes') }}" class="btn btn-primary">Ver Todos os Filmes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">👥 Pessoas</h5>
+                    <p class="card-text">Conheça atores, diretores e outros profissionais do cinema.</p>
+                    <a href="{{ url_for('filmes.listar_pessoas') }}" class="btn btn-primary">Ver Todas as Pessoas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
