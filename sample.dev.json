@@ -1,0 +1,21 @@
+{
+  "BOOTSTRAP_SERVE_LOCAL": true,
+  "BOOTSTRAP_BOOTSWATCH_THEME": "Slate",
+  "APP_NAME": "Kiro Test API",
+  "APP_HOST": "0.0.0.0",
+  "APP_PORT": 5000,
+  "TIMEZONE": "America/Sao_Paulo",
+  "SQLALCHEMY_DATABASE_URI": "sqlite:///kiro_test.db",
+  "SECRET_KEY": "e92a984a9a1ced6c12d532d2f1c7c61c81552526547e1eeb647ed8a3bff4aabb",
+  "PASSWORD_MIN": 6,
+  "PASSWORD_MAIUSCULA": false,
+  "PASSWORD_MINUSCULA": false,
+  "PASSWORD_NUMERO": false,
+  "PASSWORD_SIMBOLO": false,
+  "AVATAR_SIZE": 64,
+  "MAX_IMAGE_SIZE": 5242880,
+  "MAX_IMAGE_DIMENSIONS": [2048, 2048],
+  "MAX_CONTENT_LENGTH": 5242880,
+  "EMAIL_SENDER": "dev@localhost",
+  "SEND_EMAIL": false
+}
